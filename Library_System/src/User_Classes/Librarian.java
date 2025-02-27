@@ -13,7 +13,7 @@ public class Librarian extends User {
   }
 
   
-  public void borrowItem(String request){
+  public void borrowItem(Borrowable item){
 
   }
   public void returnItem(Borrowable item){

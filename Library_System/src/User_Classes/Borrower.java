@@ -11,7 +11,7 @@ public class Borrower extends User {
         this.borrowedItems = new ArrayList<Borrowable>();
     }
 
-    public void borrowItem(String request){
+    public void borrowItem(Borrowable item){
 
     }
     public void returnItem(Borrowable item){

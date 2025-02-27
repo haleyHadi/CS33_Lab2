@@ -15,7 +15,7 @@ public abstract class User {
   }
 
   // Abstract methods -> Subclass will implement these methods
-  public abstract void borrowItem(String request);
+  public abstract void borrowItem(Borrowable item);
   public abstract void returnItem(Borrowable item);
 
   
