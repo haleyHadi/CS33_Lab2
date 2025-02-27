@@ -1,6 +1,7 @@
 package User_Classes;
 
 import Borrowable_Item_Classes.*;
+
 public abstract class User {
   private String username;
   private String password;
