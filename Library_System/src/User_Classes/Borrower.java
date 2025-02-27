@@ -1,7 +1,8 @@
 package User_Classes;
 
-import java.util.ArrayList;
 import Borrowable_Item_Classes.*;
+
+import java.util.ArrayList;
 
 public class Borrower extends User {
     private ArrayList<Borrowable> borrowedItems;
