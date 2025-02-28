@@ -1,18 +1,38 @@
 package Library_Classes;
 
-import Borrowable_Item_Classes.*;
-import User_Classes.*;
-
 import java.util.ArrayList;
 
-public class Shelf{
-    private ArrayList<T> items;
-    private int capacity;
+import Borrowable_Item_Classes.*;
 
-    //Shelf Constructor
-    public Shelf(){
-        items = new ArrayList();
-        capacity = 20;          //Arbitrary capacity size
+public class Shelf<T extends Borrowable> {
+    private ArrayList<T> items;
+    private final int CAPACITY = 20; // arbitrary
+
+    public Shelf() {
+        items = new ArrayList<>();
     }
 
+    public void browse() {
+        for (T item : items) {
+            if (item.isAvailable()) {
+                System.out.println(item);
+            }
+        }
+    }
+
+    public void addItem(T item) {
+        if (items.size() < CAPACITY) {
+            items.add(item);
+        } else {
+            System.out.println("Error: Cannot add item, shelf is full.");
+        }
+    }
+
+    public void borrowItem() {
+        
+    }
+
+    public void returnItem() {
+
+    }
 }
