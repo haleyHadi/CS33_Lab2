@@ -12,4 +12,6 @@ public interface Borrowable {
   // unmarks as borrowed for the given item
   boolean returnItem();
 
+  // implement toString for UI
+  String toString();
 }
