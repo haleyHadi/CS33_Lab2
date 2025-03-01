@@ -28,6 +28,13 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
+    public void removeItem(T item){
+        if (items.size() > 0){
+            items.remove(item);
+            //System.out.println("Item: " + item + " , successfully removed.");  //testing proper removal
+        }
+    }
+
     public void borrowItem(T item) {
         if (items.contains(item) && item.isAvailable()) {
             item.setAvailable(false);               // Mark the item as borrowed
