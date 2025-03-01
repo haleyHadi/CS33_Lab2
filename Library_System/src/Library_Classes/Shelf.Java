@@ -28,11 +28,21 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
-    public void borrowItem() {
-        
+    public void borrowItem(T item) {
+        if (items.contains(item) && item.isAvailable()) {
+            item.setAvailable(false);               // Mark the item as borrowed
+            System.out.println("Item borrowed successfully.");
+        } else {
+            System.out.println("Item is either not available or not found.");
+        }
     }
 
-    public void returnItem() {
-
+    public void returnItem(T item) {
+        if (items.contains(item)) {
+            item.setAvailable(true);                // Mark the item as returned
+            System.out.println("Item returned successfully.");
+        } else {
+            System.out.println("Item not found on this shelf.");
+        }
     }
 }

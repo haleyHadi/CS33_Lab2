@@ -2,19 +2,57 @@ package Library_Classes;
 
 import java.util.ArrayList;
 
+import Library_Classes.Shelf;
 import UI_Classes.Interface;
 import User_Classes.*;
 
 public class Library {
-    private ArrayList<Shelf> shelves;
+    private Shelf<Borrowable>[][] shelves;
     private ArrayList<User> users;
     private Interface ui;
     private UserMode userMode;
 
     public Library() {
-        shelves = new ArrayList<>();
         users = new ArrayList<>();
         ui = new Interface();
+
+        // Initialize a 3x3 grid of shelves -> arbitrary size
+        shelves = new Shelf[3][3];
+        
+        // Populate each cell with a new Shelf
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                shelves[i][j] = new Shelf<>();  // Initialize each shelf in the 2D array
+            }
+        }
+    }
+
+    //A more modular constructor to allow users to change the size of the Library
+    public Library(int row, int col){
+            users = new ArrayList<>();
+            ui = new Interface();
+    
+            // Initialize a 3x3 grid of shelves -> arbitrary size
+            shelves = new Shelf[row][col];
+            
+            // Populate each cell with a new Shelf
+            for (int i = 0; i < row; i++) {
+                for (int j = 0; j < col; j++) {
+                    shelves[i][j] = new Shelf<>();  // Initialize each shelf in the 2D array
+                }
+            }
+        }
+    }
+
+
+    //Displays all items on the shelves 
+    public void browseLibrary() {
+        for (int i = 0; i < shelves.length; i++) {
+            for (int j = 0; j < shelves[i].length; j++) {
+                System.out.println("Shelf [" + i + "][" + j + "]:");
+                shelves[i][j].browse();             // Browse items on this shelf
+            }
+        }
     }
 
     public void librarySetup() {

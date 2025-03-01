@@ -32,6 +32,7 @@ public class Book implements Borrowable{
             //sets the due date to 1 week after the borrow method is called
             this.dueDate = new Date(System.currentTimeMillis() + (7 * 24 * 60 * 60 *1000));
             System.out.println("Book succesfully borrowed. The due date is " + dueDate + ".");
+            
             return true;
         }
         else{
@@ -43,6 +44,8 @@ public class Book implements Borrowable{
 
     // this function resets the book to a borrowable state
     //dueDate is reset to nothing and availability is set to true
+
+    //need to update this functionality -> Check for due date before setting null. If late need to pay fees. 
     public boolean returnItem(){
         if (!available){
             this.available = true;
@@ -73,6 +76,12 @@ public class Book implements Borrowable{
 
     public Date dueDate(){
         return dueDate;
+    }
+
+
+    //Setter Methods
+    public void setAvailable(boolean val){
+        this.available = val;
     }
     
 }
