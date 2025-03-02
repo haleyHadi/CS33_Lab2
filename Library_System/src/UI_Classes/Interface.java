@@ -11,14 +11,45 @@ public class Interface {
         scanner = new Scanner(System.in);
     }
 
-    public int interfaceStart() {
+    public int interfaceMenu() {
         System.out.println("Hello and welcome to the library!" + 
                          "\nHow may I help you today?" + 
                          "\n" + 
                          "\n[1] Browse selection." + 
                          "\n[2] Log in." + 
-                         "\n[3] Create an account.");
+                         "\n[3] Create an account." +
+                         "\n[4] Exit program.");
         return parseInteger(1, 4);
+    }
+                        
+    public int borrowerInterface() {
+        System.out.println("Please select an option." + 
+                         "\n" + 
+                         "\n[1] Browse selection." + 
+                         "\n[2] Request an item" + 
+                         "\n[3] Return an item." +
+                         "\n[4] Log out.");
+        return parseInteger(1, 5);
+    }
+
+    public int librarianInterface() {
+        System.out.println("Please select an option." + 
+                         "\n" + 
+                         "\n[1] Browse selection." + 
+                         "\n[2] Request an item" + 
+                         "\n[3] Return an item." +
+                         "\n[4] Add an item." +
+                         "\n[5] Remove an item." +
+                         "\n[6] Log out.");
+        return parseInteger(1, 7);
+    }
+
+    public int invalidUsernameOrPassword() {
+        System.out.println("Error: Invalid username or password" +
+                         "\n" + 
+                         "\n[1] Continue?" + 
+                         "\n[2] Return to menu.");
+        return parseInteger(1, 3);
     }
 
     public String getAccountName() {
