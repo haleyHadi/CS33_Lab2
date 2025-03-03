@@ -192,7 +192,6 @@ public class Interface {
                 break;
             }
         }
-        System.out.println("RESULT: " + result);
         return result;
     }
 
