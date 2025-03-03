@@ -87,4 +87,8 @@ public class Magazine implements Borrowable {
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
+
+    public String toString() {
+        return "\"" + this.title + " - Genre: " + this.genre + "\n\tIssue Number: " + this.issueNumber + " - Publication Date: " + this.publicationDate;
+    }
 }

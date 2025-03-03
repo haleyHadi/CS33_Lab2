@@ -84,4 +84,7 @@ public class Book implements Borrowable{
         this.available = val;
     }
     
+    public String toString() {
+        return "\"" + title + "\" by " + author + " - Genre: " + genre;
+    }
 }

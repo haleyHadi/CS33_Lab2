@@ -15,6 +15,9 @@ public interface Borrowable {
   //sets the availability of borrowable items to the parameter value
   void setAvailable(boolean val);
 
+  // Returns the title of the borrowable item
+  String getTitle();
+
   // implement toString for UI
   String toString();
 

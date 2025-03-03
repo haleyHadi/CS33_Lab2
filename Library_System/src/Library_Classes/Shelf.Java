@@ -18,7 +18,7 @@ public class Shelf<T extends Borrowable> {
     public void browse() {
         for (T item : items) {
             if (item.isAvailable()) {
-                System.out.println(item);
+                System.out.println(item.toString());
             }
         }
     }

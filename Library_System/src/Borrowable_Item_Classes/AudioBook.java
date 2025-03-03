@@ -93,4 +93,8 @@ public class AudioBook implements Borrowable{
     public void setDurationInMinutes(int durationInMinutes) {
         this.durationInMinutes = durationInMinutes;
     }
+
+    public String toString() {
+        return "\"" + title + "\" by " + author + " - Genre: " + genre + "\n\tNarrated by: " + narrator + " - Duration (min): " + durationInMinutes;
+    }
 }

@@ -1,9 +1,12 @@
 package Library_Classes;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.NoSuchElementException;
+import java.util.List;
+import java.util.Arrays;
 
-import Borrowable_Item_Classes.Borrowable;
+import Borrowable_Item_Classes.*;
 import Library_Classes.Shelf;
 import UI_Classes.Interface;
 import User_Classes.*;
@@ -102,10 +105,41 @@ public class Library {
         return false;   //if itemFound is still false -> returns false since it cannot be removed
     }
 
+    // Method to create and add Borrowable items to the library
+    public void addDefaultItems() {
+        // List of Borrowable objects to be added to the library
+        List<Borrowable> items = Arrays.asList(
+            new Book("The Great Gatsby", "F. Scott Fitzgerald", "Classic"),
+            new Book("1984", "George Orwell", "Dystopian"),
+            new Book("To Kill a Mockingbird", "Harper Lee", "Fiction"),
+            new Book("Moby Dick", "Herman Melville", "Adventure"),
+            new Book("Pride and Prejudice", "Jane Austen", "Romance"),
+
+            new AudioBook("Fahrenheit 451", "Ray Bradbury", "Political Fiction", "Christopher Hurt", 301),
+            new Magazine("Times Person of the Year - 2012", "Politics", 1234567, new Date(2012 - 1900, 12 - 1, 18)),
+            new Movie("The Batman", "Action, Suspense", "Matt Reeves", 176, new Date(2022 - 1900, 3 - 1, 4)),
+            new Music("Die With A Smile", "Pop", "Lady Gaga, Bruno Mars", 252, new Date(2024 - 1900, 8 - 1, 15))
+        );
+
+        // Add each item to the library
+        for (Borrowable item : items) {
+            // System.out.println(item.toString());  //testing output
+            try {
+                if (!addItem(item)) {
+                    System.out.println("Could not add " + item.getTitle() + " to the library (library is full).");
+                }
+            } catch (FullShelfException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+    }
+
     //returns the entrie 2D array of shelves
     public Shelf<Borrowable>[][] getShelves(){
         return shelves;
     }
+
+
 
     public void librarySetup() {
 

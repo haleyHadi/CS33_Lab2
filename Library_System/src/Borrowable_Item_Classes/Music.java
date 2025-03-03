@@ -97,4 +97,8 @@ public class Music implements Borrowable {
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
+    
+    public String toString() {
+        return "\"" + this.title + "\" by " + this.artist + " - Genre: " + this.genre + "\n\tReleased on: " + this.releaseDate + " - Duration (min): " + this.durationInMinutes;
+     }
 }

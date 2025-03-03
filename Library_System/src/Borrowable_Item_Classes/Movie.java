@@ -97,4 +97,8 @@ public class Movie implements Borrowable {
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
     }
+
+    public String toString() {
+        return "\"" + this.title + "\" by " + this.director + " - Genre: " + this.genre + "\n\tRleased on: " + this.releaseDate + " - Duration (min): " + this.durationInMinutes;
+     }
 }
