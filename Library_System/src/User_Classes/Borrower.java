@@ -22,8 +22,7 @@ public class Borrower extends User {
             // If there are, throw an OverdueBookException
             throw new OverdueBookException("You cannot borrow a new book because you have overdue books. Please return them first.");
         }
-        if (item.borrow())
-            borrowedItems.add(item);
+        borrowedItems.add(item);
     }
 
     public Borrowable returnItem(int index) {

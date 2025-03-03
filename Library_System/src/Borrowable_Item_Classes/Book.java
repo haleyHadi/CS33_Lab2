@@ -35,9 +35,6 @@ public class Book implements Borrowable{
             
             return true;
         }
-        else{
-            System.out.println("Book is unavailable, it is already borrowed.");
-        }
 
         return false;
     }
@@ -86,5 +83,22 @@ public class Book implements Borrowable{
     
     public String toString() {
         return "\"" + title + "\" by " + author + " - Genre: " + genre;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // same
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Book other = (Book) obj;
+    
+        if (this.genre.equals(other.genre)
+            && this.author.equals(other.author)
+            && this.title.equals(other.title)) {
+            return true;
+        }
+        return false;
     }
 }

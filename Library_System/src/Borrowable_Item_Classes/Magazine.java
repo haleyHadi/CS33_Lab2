@@ -34,8 +34,6 @@ public class Magazine implements Borrowable {
             this.dueDate = new Date(System.currentTimeMillis() + (7 * 24 * 60 * 60 * 1000));
             System.out.println("Magazine successfully borrowed. The due date is " + dueDate + ".");
             return true;
-        } else {
-            System.out.println("Magazine is unavailable, it is already borrowed.");
         }
         return false;
     }
@@ -90,5 +88,22 @@ public class Magazine implements Borrowable {
 
     public String toString() {
         return "\"" + this.title + " - Genre: " + this.genre + "\n\tIssue Number: " + this.issueNumber + " - Publication Date: " + this.publicationDate;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // same
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Magazine other = (Magazine) obj;
+    
+        if (this.genre.equals(other.genre)
+            && this.issueNumber == other.issueNumber
+            && this.title.equals(other.title)) {
+            return true;
+        }
+        return false;
     }
 }

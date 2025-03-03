@@ -50,9 +50,7 @@ public class Movie implements Borrowable {
             this.dueDate = null;
             System.out.println("Movie successfully returned.");
             return true;
-        } else {
-            System.out.println("You cannot return an unborrowed movie.");
-        }
+        } 
         return false;
     }
 
@@ -100,5 +98,23 @@ public class Movie implements Borrowable {
 
     public String toString() {
         return "\"" + this.title + "\" by " + this.director + " - Genre: " + this.genre + "\n\tRleased on: " + this.releaseDate + " - Duration (min): " + this.durationInMinutes;
-     }
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // same
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Movie other = (Movie) obj;
+    
+        if (this.genre.equals(other.genre)
+            && this.director.equals(other.director)
+            && this.title.equals(other.title)
+            && this.durationInMinutes == other.durationInMinutes) {
+            return true;
+        }
+        return false;
+    }
 }

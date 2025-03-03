@@ -50,8 +50,6 @@ public class Music implements Borrowable {
             this.dueDate = null;
             System.out.println("Music successfully returned.");
             return true;
-        } else {
-            System.out.println("You cannot return an unborrowed music item.");
         }
         return false;
     }
@@ -100,5 +98,23 @@ public class Music implements Borrowable {
     
     public String toString() {
         return "\"" + this.title + "\" by " + this.artist + " - Genre: " + this.genre + "\n\tReleased on: " + this.releaseDate + " - Duration (min): " + this.durationInMinutes;
-     }
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true; // same
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Music other = (Music) obj;
+    
+        if (this.genre.equals(other.genre)
+            && this.artist.equals(other.artist)
+            && this.title.equals(other.title)
+            && this.durationInMinutes == other.durationInMinutes) {
+            return true;
+        }
+        return false;
+    }
 }

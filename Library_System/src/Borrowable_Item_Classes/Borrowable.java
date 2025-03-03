@@ -21,5 +21,6 @@ public interface Borrowable {
   // implement toString for UI
   String toString();
 
-  
+  // override equals function so comparative methods work
+  boolean equals(Object obj);
 }

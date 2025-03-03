@@ -36,8 +36,6 @@ public class AudioBook implements Borrowable{
             this.dueDate = new Date(System.currentTimeMillis() + (7 * 24 * 60 * 60 * 1000));
             System.out.println("Audiobook successfully borrowed. The due date is " + dueDate + ".");
             return true;
-        } else {
-            System.out.println("Audiobook is unavailable, it is already borrowed.");
         }
         return false;
     }
@@ -97,4 +95,24 @@ public class AudioBook implements Borrowable{
     public String toString() {
         return "\"" + title + "\" by " + author + " - Genre: " + genre + "\n\tNarrated by: " + narrator + " - Duration (min): " + durationInMinutes;
     }
+
+    @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+        return true; // same
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+        return false;
+    }
+    AudioBook other = (AudioBook) obj;
+
+    if (this.genre.equals(other.genre)
+        && this.author.equals(other.author)
+        && this.narrator.equals(other.narrator)
+        && this.title.equals(other.title)
+        && this.durationInMinutes == other.durationInMinutes) {
+        return true;
+    }
+    return false;
+  }
 }
