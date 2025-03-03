@@ -1,10 +1,11 @@
 # Lab 2 (Haley, David, Gary)
 
-Library program that includes a borrower and a librarian, who are able to rent out, return books, add books (only for librarian).
+Library Program
 
-# Details 
+# How to run the program
 
-User may create their username, password, pay fines if needed, or browse shelf.  
+1. install vscode
+2. git clone 
 
 
 
