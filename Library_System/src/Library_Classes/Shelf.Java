@@ -53,32 +53,28 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
-    public Borrowable borrowItem(T item) throws IllegalStateException, NoSuchElementException{
-        if (!item.isAvailable()) {
-            // If the item is already borrowed (unavailable), throw an IllegalStateException
-            throw new IllegalStateException("Item is already borrowed or unavailable.");
+    public boolean borrowItem(T item) {
+        for (Borrowable _item : items) {
+            if (_item.equals(item)) {
+                item.setAvailable(false);
+                System.out.println("Item borrowed successfully.");
+                return true;
+            }
         }
-        else if (!items.contains(item)){
-            // If the item doesn't exist in this shelf, throw a NoSuchElementException
-            throw new NoSuchElementException("Item not found in this shelf.");
-        }
-        else {
-            // Sets to a borrowed state if the shelf contains the item
-            item.setAvailable(false);
-            System.out.println("Item borrowed successfully.");
-            return item;
-        }
+        return false;
     }
 
 
 
-    public void returnItem(T item) {
-        if (items.contains(item)) {
-            item.setAvailable(true);                // Mark the item as returned
-            System.out.println("Item returned successfully.");
-        } else {
-            System.out.println("Item not found on this shelf.");
+    public boolean returnItem(T item) {
+        for (Borrowable _item : items) {
+            if (_item.equals(item)) {
+                item.setAvailable(true);
+                System.out.println("Item returned successfully.");
+                return true;
+            }
         }
+        return false;
     }
 
 

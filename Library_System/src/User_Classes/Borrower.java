@@ -26,18 +26,10 @@ public class Borrower extends User {
             borrowedItems.add(item);
     }
 
-    public void returnItem(Borrowable item) throws NoSuchElementException{
-        // Check if the item exists in borrowedItems
-        if (!borrowedItems.contains(item)) {
-            // If the item is not found, throw a NoSuchElementException
-            throw new NoSuchElementException("The item is not found in your borrowed items.");
-        }
-
-        if (item.returnItem()) {
-            // Remove the item from borrowedItems if returned successfully
-            borrowedItems.remove(item);
-            System.out.println("Item successfully returned.");
-        }
+    public Borrowable returnItem(int index) {
+        Borrowable item = borrowedItems.get(index);
+        borrowedItems.remove(index);
+        return item;
     }
 
     //checks if the user's borrowedItems list has any overdue books
@@ -53,7 +45,17 @@ public class Borrower extends User {
         return false;
     }
 
+    public int getNumberBorrowedBooks() {
+        return borrowedItems.size();
+    }
 
+    public int displayBorrowedItems() {
+        int size = borrowedItems.size();
+        for (int i = 0; i < size; i++) {
+            System.out.printf("[%d] %s.", i + 1, borrowedItems.get(i).toString());
+        }
+        return size;
+    }
     //Getter Methods
     // public ArrayList<Borrowabble> getBorrowedItems(){
     //     return borrowedItems;

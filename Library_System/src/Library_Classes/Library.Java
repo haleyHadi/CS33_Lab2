@@ -11,6 +11,7 @@ import Library_Classes.Shelf;
 import UI_Classes.Interface;
 import User_Classes.*;
 import exceptions.FullShelfException;
+import exceptions.OverdueBookException;
 
 public class Library {
     private Shelf<Borrowable>[][] shelves;
@@ -258,6 +259,19 @@ public class Library {
         switch (option) {
             case 1:
                 browseLibrary();
+                break;
+            case 2:
+                try {
+                    borrowItem();
+                } catch (NoSuchElementException e) {
+                    System.out.println("Error: That item does not exist.");
+                } catch (OverdueBookException e) {
+                    System.out.println("Error: Cannot borrow items when fees are due.");
+                }
+                break;
+            case 3:
+                returnItem();
+                break;
             case 4:
                 userMode = UserMode.MENU;
                 break;
@@ -272,6 +286,18 @@ public class Library {
             case 1:
                 browseLibrary();
                 break;
+            case 2:
+                try {
+                    borrowItem();
+                } catch (NoSuchElementException e) {
+                    System.out.println("Error: That item does not exist.");
+                } catch (OverdueBookException e) {
+                    System.out.println("Error: Cannot borrow items when fees are due.");
+                }
+                break;
+            case 3:
+                returnItem();
+                break;
             case 4:
                 item = createItem();
                 try {
@@ -279,6 +305,7 @@ public class Library {
                 } catch (FullShelfException e) {
                     System.out.println("Error: Shelf is full.");
                 }
+                break;
             case 5:
                 item = createItem();
                 try {
@@ -286,6 +313,7 @@ public class Library {
                 } catch (NoSuchElementException e) {
                     System.out.println("Error: Item is already not found in the library.");
                 }
+                break;
             case 6:
                 userMode = UserMode.MENU;
                 break;
@@ -310,13 +338,44 @@ public class Library {
     }
 
     private void returnItem() {
-        
+        if (currentUser instanceof Borrower) {
+            System.out.println("Select an item.\n");
+            Borrower borrower = (Borrower)currentUser;
+            if (borrower.getNumberBorrowedBooks() == 0) {
+                System.out.println("Error: No books borrowed.");
+                return;
+            }
+            int index = ui.selectBorrowed(borrower) - 1;
+            Borrowable item = currentUser.returnItem(index);
+            for (int i = 0; i < shelvesRows; i++){
+                for (int j = 0; j < shelvesColumns; j++){
+                    Shelf<Borrowable> shelf = shelves[i][j];
+                    if (shelf.returnItem(item)) {
+                        return;
+                    }
+                }
+            }
+        }
+        System.out.println("Error: Librarians cannot borrow.");
     }
     
-    private void borrowItem() {
-        int shelf = ui.selectShelf();
+    private void borrowItem() throws NoSuchElementException, OverdueBookException {
         Borrowable item = createItem();
+        boolean borrowed = false;
 
-        
+        for (int i = 0; i < shelvesRows; i++){
+            for (int j = 0; j < shelvesColumns; j++){
+                Shelf<Borrowable> shelf = shelves[i][j];
+
+                if (shelf.borrowItem(item)) {
+                    borrowed = true;
+                    currentUser.borrowItem(item);
+                }
+            }
+        }
+
+        if (!borrowed) {
+            throw new NoSuchElementException();
+        }
     }
 }

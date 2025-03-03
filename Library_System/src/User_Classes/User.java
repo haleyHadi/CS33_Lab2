@@ -19,7 +19,7 @@ public abstract class User {
 
   // Abstract methods -> Subclass will implement these methods
   public abstract void borrowItem(Borrowable item) throws OverdueBookException;
-  public abstract void returnItem(Borrowable item) throws NoSuchElementException;
+  public abstract Borrowable returnItem(int index) throws NoSuchElementException;
 
   
   // Allows user to pay their fine

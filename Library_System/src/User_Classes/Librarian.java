@@ -35,8 +35,9 @@ public class Librarian extends User {
     System.out.println("Librarians cannot borrow items for personal use.");
   }
   
-  public void returnItem(Borrowable item){
+  public Borrowable returnItem(int index) {
       System.out.println("Librarians cannot return items for personal use.");
+      return null;
   }
 
 }

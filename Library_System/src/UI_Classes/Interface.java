@@ -8,6 +8,7 @@ import Borrowable_Item_Classes.Book;
 import Borrowable_Item_Classes.Magazine;
 import Borrowable_Item_Classes.Movie;
 import Borrowable_Item_Classes.Music;
+import User_Classes.Borrower;
 
 public class Interface {
     private Scanner scanner;
@@ -33,7 +34,7 @@ public class Interface {
         System.out.println("Please select an option." + 
                          "\n" + 
                          "\n[1] Browse selection." + 
-                         "\n[2] Request an item" + 
+                         "\n[2] Borrow an item" + 
                          "\n[3] Return an item." +
                          "\n[4] Log out.");
         return parseInteger(1, 5);
@@ -43,7 +44,7 @@ public class Interface {
         System.out.println("Please select an option." + 
                          "\n" + 
                          "\n[1] Browse selection." + 
-                         "\n[2] Request an item" + 
+                         "\n[2] Borrow an item" + 
                          "\n[3] Return an item." +
                          "\n[4] Add an item." +
                          "\n[5] Remove an item." +
@@ -175,6 +176,12 @@ public class Interface {
                          "\n[4] Music." +
                          "\n[5] Magazine.");
         return parseInteger(1, 6);
+    }
+
+    public int selectBorrowed(Borrower borrower) {
+        System.out.println("Please select an item to return.\n");
+        int size = borrower.displayBorrowedItems();
+        return parseInteger(1, size + 1);
     }
 
     private String getSpecifiedLength(int maxLength) {
