@@ -23,6 +23,7 @@ public class Library {
 
     public Library() {
         userMode = UserMode.MENU;
+        currentUser = null;
         users = new ArrayList<>();
         ui = new Interface();
 
@@ -96,14 +97,11 @@ public class Library {
                     // System.out.println("Item removed from shelf (" + i + ", " + j + ").");      //used for testing 
                     break;  // Exit the loop once item is removed
                 }
-                else
-                    throw new NoSuchElementException("The item was not found in the library.");
             }
             if (itemFound) 
                 return true;  // return true if found and removed
         }
-   
-        return false;   //if itemFound is still false -> returns false since it cannot be removed
+        throw new NoSuchElementException("The item was not found in the library."); // item not in library if it reaches this point
     }
 
     // Method to create and add Borrowable items to the library
@@ -258,6 +256,8 @@ public class Library {
         int option = ui.borrowerInterface();
 
         switch (option) {
+            case 1:
+                browseLibrary();
             case 4:
                 userMode = UserMode.MENU;
                 break;
@@ -266,11 +266,57 @@ public class Library {
 
     private void handleLibrarian() {
         int option = ui.librarianInterface();
+        Borrowable item = null;
 
         switch (option) {
+            case 1:
+                browseLibrary();
+                break;
+            case 4:
+                item = createItem();
+                try {
+                    addItem(item);
+                } catch (FullShelfException e) {
+                    System.out.println("Error: Shelf is full.");
+                }
+            case 5:
+                item = createItem();
+                try {
+                    removeItem(item);
+                } catch (NoSuchElementException e) {
+                    System.out.println("Error: Item is already not found in the library.");
+                }
             case 6:
                 userMode = UserMode.MENU;
                 break;
         }
+    }
+
+    private Borrowable createItem() {
+        int option = ui.selectItemType();
+        switch (option) {
+            case 1:
+                return ui.addBook();
+            case 2:
+                return ui.addMovie();
+            case 3:
+                return ui.addAudioBook();
+            case 4: 
+                return ui.addMusic();
+            case 5:
+                return ui.addMagazine();
+        }
+        return null; // null item, should not be reachable
+    }
+
+    private void returnItem() {
+        
+    }
+    
+    private void borrowItem() {
+        int shelf = ui.selectShelf();
+        Borrowable item = createItem();
+
+        
     }
 }

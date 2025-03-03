@@ -53,7 +53,7 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
-    public void borrowItem(T item) throws IllegalStateException, NoSuchElementException{
+    public Borrowable borrowItem(T item) throws IllegalStateException, NoSuchElementException{
         if (!item.isAvailable()) {
             // If the item is already borrowed (unavailable), throw an IllegalStateException
             throw new IllegalStateException("Item is already borrowed or unavailable.");
@@ -66,6 +66,7 @@ public class Shelf<T extends Borrowable> {
             // Sets to a borrowed state if the shelf contains the item
             item.setAvailable(false);
             System.out.println("Item borrowed successfully.");
+            return item;
         }
     }
 

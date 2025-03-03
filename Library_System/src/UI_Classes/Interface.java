@@ -53,9 +53,15 @@ public class Interface {
 
     public int browserInterface() {
         System.out.println("Shelves are numbered from 1-30." +
-                         "\nPlease enter the number of the shelf you wish to browse" +
+                         "\nPlease enter the number of the shelf you wish to browse." +
                          "\nOr press [0] to exit.");
         return parseInteger(0, 31);
+    }
+
+    public int selectShelf() {
+        System.out.println("Shelves are numbered from 1-30." +
+                         "\nPlease enter the number of the shelf you wish to select.");
+        return parseInteger(1, 31);
     }
 
     public int invalidUsernameOrPassword() {
@@ -167,9 +173,8 @@ public class Interface {
                          "\n[2] Movie." + 
                          "\n[3] Audio book." +
                          "\n[4] Music." +
-                         "\n[5] Magazine." +
-                         "\n[6] Exit.");
-        return parseInteger(1, 7);
+                         "\n[5] Magazine.");
+        return parseInteger(1, 6);
     }
 
     private String getSpecifiedLength(int maxLength) {
