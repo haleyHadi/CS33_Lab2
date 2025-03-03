@@ -20,6 +20,16 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
+    // Checks if the shelf has space
+    public boolean hasSpace() {            
+        return items.size() < CAPACITY;  // Returns true if there is space
+    }
+
+    // Check if the item exists on the shelf
+    public boolean contains(T item) {
+        return items.contains(item);  // Returns true if item is on the shelf
+    }
+
     public void addItem(T item) {
         if (items.size() < CAPACITY) {
             items.add(item);
@@ -52,4 +62,6 @@ public class Shelf<T extends Borrowable> {
             System.out.println("Item not found on this shelf.");
         }
     }
+
+
 }

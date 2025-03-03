@@ -1,6 +1,7 @@
 package User_Classes;
 
 import Borrowable_Item_Classes.*;
+import Library_Classes.Library;
 
 public class Librarian extends User {
   private Library library;  // A reference to the Library system
@@ -12,33 +13,35 @@ public class Librarian extends User {
 
   //Adds a book (borrowable) to the library system - First open shelf (No Sorting)
   public void addItem(Borrowable item) {
-    for (Shelf<Borrowable> shelf : library.getShelves()) {
-      if (shelf.hasSpace()) {
-        shelf.addItem(item); // Adding item to the shelf
-        System.out.println("The item has been added to the library.");
-        return;
-      }
-    }
-    System.out.println("No available space in the library to add the item.");
+    if (library.addItem(item))
+      System.out.println("The item has been added to the library.");
+    else
+      System.out.println("No available space in the library to add the item.");
   }
 
   // Removes an item from the library system
     public void removeItem(Borrowable item) {
-      boolean itemFound = false;
+    if (library.removeItem(item))
+      System.out.println("The item has been removed from the library.");
 
-      // Iterate through each shelf to find the item
-      for (Shelf<Borrowable> shelf : library.getShelves()) {
-          if (shelf.containsItem(item)) {
-              shelf.removeItem(item); // Remove the item from the shelf
-              itemFound = true;
-              System.out.println("The item has been removed from the library.");
-              return;
-          }
-      }
+    else
+      System.out.println("The item was not found in the library.");
 
-      if (!itemFound) {
-          System.out.println("The item was not found in the library.");
-      }
+      // boolean itemFound = false;
+
+      // // Iterate through each shelf to find the item
+      // for (Shelf<Borrowable> shelf : library.getShelves()) {
+      //     if (shelf.containsItem(item)) {
+      //         shelf.removeItem(item); // Remove the item from the shelf
+      //         itemFound = true;
+      //         System.out.println("The item has been removed from the library.");
+      //         return;
+      //     }
+      // }
+
+      // if (!itemFound) {
+      //     System.out.println("The item was not found in the library.");
+      // }
   }
 
   //Disallow borrowing and returning for librarians to emphasize categorization of Borrower and Librarian

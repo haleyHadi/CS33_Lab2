@@ -12,6 +12,11 @@ public interface Borrowable {
   // unmarks as borrowed for the given item
   boolean returnItem();
 
+  //sets the availability of borrowable items to the parameter value
+  void setAvailable(boolean val);
+
   // implement toString for UI
   String toString();
+
+  
 }

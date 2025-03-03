@@ -40,7 +40,6 @@ public class Library {
 
         shelvesColumns = col;
         shelvesRows = row;
-        // Initialize a 3x3 grid of shelves -> arbitrary size
         shelves = new Shelf[row][col];
         
         // Populate each cell with a new Shelf
@@ -61,8 +60,51 @@ public class Library {
         }
     }
 
-    public void librarySetup() {
+    //Adds and item to the next available slot in a shelf
+    //returns true if succesfully added, false if not
+    public boolean addItem(Borrowable item) {
+        for (int i = 0; i < shelvesRows; i++){
+
+            for (int j = 0; j < shelvesColumns; j++){
+                Shelf<Borrowable> shelf = shelves[i][j];
+                if (shelf.hasSpace()){
+                    shelf.addItem(item);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    //Removes an item from any shelf in the library
+    public boolean removeItem(Borrowable item) {
+        boolean itemFound = false;
         
+        for (int i = 0; i < shelvesRows; i++) {
+            for (int j = 0; j < shelvesColumns; j++) {
+                Shelf<Borrowable> shelf = shelves[i][j];
+                if (shelf.contains(item)) {  // Check if the shelf contains the item
+                    shelf.removeItem(item);  // Remove the item from the shelf
+                    itemFound = true;
+                    // System.out.println("Item removed from shelf (" + i + ", " + j + ").");      //used for testing 
+                    break;  // Exit the loop once item is removed
+                }
+            }
+            if (itemFound) 
+                return true;  // return true if found and removed
+        }
+   
+        return false;   //if itemFound is still false -> returns false since it cannot be removed
+    }
+
+    //returns the entrie 2D array of shelves
+    public Shelf<Borrowable>[][] getShelves(){
+        return shelves;
+    }
+
+    public void librarySetup() {
+
     }
 
     public void libraryLoop() { // very wip
