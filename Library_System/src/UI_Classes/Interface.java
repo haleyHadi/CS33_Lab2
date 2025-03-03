@@ -1,6 +1,13 @@
 package UI_Classes;
 
+import java.util.Date;
 import java.util.Scanner;
+
+import Borrowable_Item_Classes.AudioBook;
+import Borrowable_Item_Classes.Book;
+import Borrowable_Item_Classes.Magazine;
+import Borrowable_Item_Classes.Movie;
+import Borrowable_Item_Classes.Music;
 
 public class Interface {
     private Scanner scanner;
@@ -75,6 +82,94 @@ public class Interface {
                          "\n[1] Borrower." + 
                          "\n[2] Librarian.");
         return parseInteger(1, 3);
+    }
+
+    public Book addBook() {
+        System.out.println("Enter title.");
+        String title = scanner.nextLine();
+        System.out.println("Enter author.");
+        String author = scanner.nextLine();
+        System.out.println("Enter genre.");
+        String genre = scanner.nextLine();
+        return new Book(title, author, genre);
+    }
+
+    public Movie addMovie() {
+        System.out.println("Enter title.");
+        String title = scanner.nextLine();
+        System.out.println("Enter director.");
+        String director = scanner.nextLine();
+        System.out.println("Enter genre.");
+        String genre = scanner.nextLine();
+        System.out.println("Enter length in minutes.");
+        int length = parseInteger(0, 10000);
+        System.out.println("Enter year of release.");
+        int year = parseInteger(0, 2100);
+        System.out.println("Enter month of release.");
+        int month = parseInteger(1, 13);
+        System.out.println("Enter day of release.");
+        int day = parseInteger(1, 32);
+        return new Movie(title, genre, director, length, new Date(year - 1900, month - 1, day));
+    }
+    
+    public Magazine addMagazine() {
+        System.out.println("Enter title.");
+        String title = scanner.nextLine();
+        System.out.println("Enter genre.");
+        String genre = scanner.nextLine();
+        System.out.println("Enter issue number.");
+        int issueNumber = parseInteger(0, 1000000000);
+        System.out.println("Enter year of release.");
+        int year = parseInteger(0, 2100);
+        System.out.println("Enter month of release.");
+        int month = parseInteger(1, 13);
+        System.out.println("Enter day of release.");
+        int day = parseInteger(1, 32);
+        return new Magazine(title, genre, issueNumber, new Date(year - 1900, month - 1, day));
+    }
+
+    public AudioBook addAudioBook() {
+        System.out.println("Enter title.");
+        String title = scanner.nextLine();
+        System.out.println("Enter author.");
+        String author = scanner.nextLine();
+        System.out.println("Enter genre.");
+        String genre = scanner.nextLine();
+        System.out.println("Enter narrator.");
+        String narrator = scanner.nextLine();
+        System.out.println("Enter length in minutes.");
+        int length = parseInteger(0, 10000);
+        return new AudioBook(title, author, genre, narrator, length);
+    }
+
+    public Music addMusic() {
+        System.out.println("Enter title.");
+        String title = scanner.nextLine();
+        System.out.println("Enter genre.");
+        String genre = scanner.nextLine();
+        System.out.println("Enter artist.");
+        String artist = scanner.nextLine();
+        System.out.println("Enter length in minutes.");
+        int length = parseInteger(0, 10000);
+        System.out.println("Enter year of release.");
+        int year = parseInteger(0, 2100);
+        System.out.println("Enter month of release.");
+        int month = parseInteger(1, 13);
+        System.out.println("Enter day of release.");
+        int day = parseInteger(1, 32);
+        return new Music(title, genre, artist, length, new Date(year - 1900, month - 1, day));
+    }
+
+    public int selectItemType() {
+        System.out.println("Please select a type of item." + 
+                         "\n" + 
+                         "\n[1] Book" + 
+                         "\n[2] Movie." + 
+                         "\n[3] Audio book." +
+                         "\n[4] Music." +
+                         "\n[5] Magazine." +
+                         "\n[6] Exit.");
+        return parseInteger(1, 7);
     }
 
     private String getSpecifiedLength(int maxLength) {
