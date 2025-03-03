@@ -17,6 +17,7 @@ public class Library {
     private ArrayList<User> users;
     private Interface ui;
     private UserMode userMode;
+    private User currentUser;
     private final int shelvesColumns;
     private final int shelvesRows;
 
@@ -57,12 +58,12 @@ public class Library {
 
     //Displays all items on the shelves 
     public void browseLibrary() {
-        for (int i = 0; i < shelves.length; i++) {
-            for (int j = 0; j < shelves[i].length; j++) {
-                System.out.println("Shelf [" + i + "][" + j + "]:");
-                shelves[i][j].browse();             // Browse items on this shelf
-            }
+        int option = ui.browserInterface();
+        if (option == 0) {
+            userMode = UserMode.MENU;
+            return;
         }
+        shelves[(option - 1) % shelvesColumns][(option - 1) % shelvesRows].browse();
     }
 
     //Adds and item to the next available slot in a shelf
@@ -140,17 +141,14 @@ public class Library {
     }
 
 
-
-    public void librarySetup() {
-
-    }
-
     public void libraryLoop() { // very wip
         while (true) {
             switch (userMode) {
                 case UserMode.MENU:
                     libraryMenu();
+                    break;
                 case UserMode.BROWSING:
+                    browseLibrary();
                     break;
                 case UserMode.LOGGED_BORROWER:
                     handleBorrower();
@@ -227,6 +225,7 @@ public class Library {
                 userMode = UserMode.LOGGED_BORROWER;
                 break;
         }
+        currentUser = users.getLast();
         System.out.println("Congratulations! You have successfully created your account!");
     }
 
@@ -243,7 +242,7 @@ public class Library {
                     if (user instanceof Librarian) {
                         userMode = UserMode.LOGGED_LIBRARIAN;
                     }
-
+                    currentUser = user;
                     return;
                 }
             }

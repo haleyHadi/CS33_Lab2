@@ -19,7 +19,7 @@ public class Interface {
                          "\n[2] Log in." + 
                          "\n[3] Create an account." +
                          "\n[4] Exit program.");
-        return parseInteger(1, 4);
+        return parseInteger(1, 5);
     }
                         
     public int borrowerInterface() {
@@ -42,6 +42,13 @@ public class Interface {
                          "\n[5] Remove an item." +
                          "\n[6] Log out.");
         return parseInteger(1, 7);
+    }
+
+    public int browserInterface() {
+        System.out.println("Shelves are numbered from 1-30." +
+                         "\nPlease enter the number of the shelf you wish to browse" +
+                         "\nOr press [0] to exit.");
+        return parseInteger(0, 31);
     }
 
     public int invalidUsernameOrPassword() {

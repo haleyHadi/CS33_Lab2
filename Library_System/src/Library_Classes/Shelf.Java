@@ -16,10 +16,15 @@ public class Shelf<T extends Borrowable> {
     }
 
     public void browse() {
+        boolean empty = false;
         for (T item : items) {
             if (item.isAvailable()) {
+                empty = true;
                 System.out.println(item.toString());
             }
+        }
+        if (!empty) {
+            System.out.println("Shelf is empty.");
         }
     }
 

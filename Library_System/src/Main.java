@@ -13,13 +13,12 @@ public class Main {
         
         //Test Functions and Test cases
         library.addDefaultItems();
-        library.browseLibrary();
 
         
 
         //User Interface Loops
         // library.librarySetup();
-        // library.libraryLoop();
+        library.libraryLoop();
     }
 
 }
