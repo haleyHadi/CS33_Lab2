@@ -1,6 +1,9 @@
 package Library_Classes;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
+
+import exceptions.FullShelfException;
 
 import Borrowable_Item_Classes.*;
 
@@ -30,12 +33,12 @@ public class Shelf<T extends Borrowable> {
         return items.contains(item);  // Returns true if item is on the shelf
     }
 
-    public void addItem(T item) {
-        if (items.size() < CAPACITY) {
+    public void addItem(T item) throws FullShelfException {
+        if (items.size() >= CAPACITY) {
+            // If the shelf is full, throw the FullShelfException
+            throw new FullShelfException("Cannot add item to shelf: Shelf is full.");
+        } else
             items.add(item);
-        } else {
-            System.out.println("Error: Cannot add item, shelf is full.");
-        }
     }
 
     public void removeItem(T item){
@@ -45,14 +48,23 @@ public class Shelf<T extends Borrowable> {
         }
     }
 
-    public void borrowItem(T item) {
-        if (items.contains(item) && item.isAvailable()) {
-            item.setAvailable(false);               // Mark the item as borrowed
+    public void borrowItem(T item) throws IllegalStateException, NoSuchElementException{
+        if (!item.isAvailable()) {
+            // If the item is already borrowed (unavailable), throw an IllegalStateException
+            throw new IllegalStateException("Item is already borrowed or unavailable.");
+        }
+        else if (!items.contains(item)){
+            // If the item doesn't exist in this shelf, throw a NoSuchElementException
+            throw new NoSuchElementException("Item not found in this shelf.");
+        }
+        else {
+            // Sets to a borrowed state if the shelf contains the item
+            item.setAvailable(false);
             System.out.println("Item borrowed successfully.");
-        } else {
-            System.out.println("Item is either not available or not found.");
         }
     }
+
+
 
     public void returnItem(T item) {
         if (items.contains(item)) {

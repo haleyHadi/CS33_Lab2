@@ -1,11 +1,13 @@
 package Library_Classes;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import Borrowable_Item_Classes.Borrowable;
 import Library_Classes.Shelf;
 import UI_Classes.Interface;
 import User_Classes.*;
+import exceptions.FullShelfException;
 
 public class Library {
     private Shelf<Borrowable>[][] shelves;
@@ -62,7 +64,7 @@ public class Library {
 
     //Adds and item to the next available slot in a shelf
     //returns true if succesfully added, false if not
-    public boolean addItem(Borrowable item) {
+    public boolean addItem(Borrowable item) throws FullShelfException{
         for (int i = 0; i < shelvesRows; i++){
 
             for (int j = 0; j < shelvesColumns; j++){
@@ -90,6 +92,8 @@ public class Library {
                     // System.out.println("Item removed from shelf (" + i + ", " + j + ").");      //used for testing 
                     break;  // Exit the loop once item is removed
                 }
+                else
+                    throw new NoSuchElementException("The item was not found in the library.");
             }
             if (itemFound) 
                 return true;  // return true if found and removed

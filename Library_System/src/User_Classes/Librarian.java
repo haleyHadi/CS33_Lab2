@@ -2,6 +2,7 @@ package User_Classes;
 
 import Borrowable_Item_Classes.*;
 import Library_Classes.Library;
+import exceptions.FullShelfException;
 
 public class Librarian extends User {
   private Library library;  // A reference to the Library system
@@ -12,7 +13,7 @@ public class Librarian extends User {
   }
 
   //Adds a book (borrowable) to the library system - First open shelf (No Sorting)
-  public void addItem(Borrowable item) {
+  public void addItem(Borrowable item) throws FullShelfException{
     if (library.addItem(item))
       System.out.println("The item has been added to the library.");
     else
@@ -27,21 +28,6 @@ public class Librarian extends User {
     else
       System.out.println("The item was not found in the library.");
 
-      // boolean itemFound = false;
-
-      // // Iterate through each shelf to find the item
-      // for (Shelf<Borrowable> shelf : library.getShelves()) {
-      //     if (shelf.containsItem(item)) {
-      //         shelf.removeItem(item); // Remove the item from the shelf
-      //         itemFound = true;
-      //         System.out.println("The item has been removed from the library.");
-      //         return;
-      //     }
-      // }
-
-      // if (!itemFound) {
-      //     System.out.println("The item was not found in the library.");
-      // }
   }
 
   //Disallow borrowing and returning for librarians to emphasize categorization of Borrower and Librarian

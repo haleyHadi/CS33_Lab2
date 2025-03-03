@@ -1,6 +1,9 @@
 package User_Classes;
 
+import java.util.NoSuchElementException;
+
 import Borrowable_Item_Classes.*;
+import exceptions.OverdueBookException;
 
 public abstract class User {
   private String username;
@@ -15,8 +18,8 @@ public abstract class User {
   }
 
   // Abstract methods -> Subclass will implement these methods
-  public abstract void borrowItem(Borrowable item);
-  public abstract void returnItem(Borrowable item);
+  public abstract void borrowItem(Borrowable item) throws OverdueBookException;
+  public abstract void returnItem(Borrowable item) throws NoSuchElementException;
 
   
   // Allows user to pay their fine
